@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import OnboardPage from "../pages/Onboard/OnboardPage";
+import OnboardPage from "../pages/Login/LoginPage";
 
 const router = createBrowserRouter([
     {
