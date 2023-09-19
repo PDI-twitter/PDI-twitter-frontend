@@ -50,8 +50,9 @@ body {
 
 
 .formLogin a {
-    display: inline-block;
-    margin-bottom: 20px;
+    width: fit-content;
+    display: flex;
+    margin: 10px 0 20px;
     font-size: 13px;
     color: #555;
     transition: all linear 160ms;
