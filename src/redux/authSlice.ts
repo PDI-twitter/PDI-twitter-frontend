@@ -1,29 +1,33 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../models/user';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IUser } from "../models/user";
+import { localStorageControl } from "../storage/localStorage";
 
 export interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
-  user: IUser | undefined
+  user: IUser | undefined;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  isLoading: false,
-  user: undefined
+  isLoading: true,
+  user: undefined,
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
-    loginSuccess: (state, {payload}) => {
+    loginSuccess: (state, action: PayloadAction<IUser>) => {
+      const user = action.payload;
       state.isAuthenticated = true;
-      state.user = payload
+      state.user = user;
+      localStorageControl.setObject("user", user);
     },
-    logout: (state, {payload}) => {
+    logout: (state) => {
       state.isAuthenticated = false;
-      state.user = undefined
+      state.user = undefined;
+      localStorageControl.reset();
     },
     startLoading: (state) => {
       state.isLoading = true;
@@ -31,9 +35,23 @@ const authSlice = createSlice({
     finishLoading: (state) => {
       state.isLoading = false;
     },
+    verifyUserInLocalHost: (state) => {
+      const user = localStorageControl.getObject("user");
+      if (user) {
+        state.user = user;
+        state.isAuthenticated = true;
+      }
+      state.isLoading = false;
+    },
   },
 });
 
-export const { loginSuccess, logout, startLoading, finishLoading } = authSlice.actions;
+export const {
+  loginSuccess,
+  logout,
+  startLoading,
+  finishLoading,
+  verifyUserInLocalHost,
+} = authSlice.actions;
 
 export default authSlice.reducer;
