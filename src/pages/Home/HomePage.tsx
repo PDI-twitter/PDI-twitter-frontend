@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import Button from "../../components/Button/Button";
 import { AuthState, logout } from "../../redux/authSlice";
 import { useSelector } from "react-redux";
-import { IUser } from "../../models/user";
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();

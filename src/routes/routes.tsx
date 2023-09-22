@@ -4,9 +4,6 @@ import PublicRoutes from "./publicRoutes";
 import LoadingPage from "../pages/Loading/LoadingPage";
 import { useSelector } from "react-redux";
 import { AuthState } from "../redux/authSlice";
-import { IUser } from "../models/user";
-import { localStorageControl } from "../storage/localStorage";
-import { verify } from "crypto";
 import { useDispatch } from "react-redux";
 import { verifyUserInLocalHost } from "../redux/authSlice";
 
