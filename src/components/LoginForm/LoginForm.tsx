@@ -9,9 +9,9 @@ import {
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Button from "../Button/Button";
 import { auth } from "../../services/firebaseConfig";
-import { Link } from "../Link";
-import { LoginFormSubtitle } from "./LoginFormSubtitle";
-import { LoginFormTitle } from "./LoginFormTitle";
+import { Link } from "../Link/Link";
+import { Title } from "../Title/Title";
+import { Subtitle } from "../Subtitle/Subtitle";
 
 type LoginFormProps = {};
 
@@ -56,26 +56,30 @@ export const LoginForm: React.FC<LoginFormProps> = ({}) => {
   return (
     <form
       method="POST"
-      className="flex flex-col bg-white shadow-[10px_10px_40px_rgba(0,0,0,0.4)] gap-[5px] p-10 rounded-[7px]"
+      className="flex flex-col bg-white shadow-[10px_10px_40px_rgba(0,0,0,0.4)] gap-[5px] p-10 rounded-[7px] w-full sm:w-[380px]"
       onSubmit={handleSubmit}
     >
-      <LoginFormTitle title={"Login"} />
-      <LoginFormSubtitle subtitle="Digite os seus dados de acesso no campo abaixo." />
-      <TextInput
-        label="E-mail"
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.currentTarget.value)}
-        type="email"
-      />
-      <TextInput
-        label="Senha"
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.currentTarget.value)}
-        type="password"
-      />
-      <Link label="Esqueci minha senha" href="/" />
+      <Title title={"Olá"} />
+      <Subtitle subtitle="Digite os seus dados de acesso no campo abaixo." />
+      <div className="space-y-4 mt-4">
+        <TextInput
+          label="E-mail"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.currentTarget.value)}
+          type="email"
+        />
+        <TextInput
+          label="Senha"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.currentTarget.value)}
+          type="password"
+        />
+      </div>
+      <div className="mb-4">
+        <Link label="Ainda não tem uma conta?" href="/register" />
+      </div>
       <Button title="Acessar" variant="standart" fullWidth type="submit" />
     </form>
   );
