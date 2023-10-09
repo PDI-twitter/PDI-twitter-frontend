@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
       <h2>{user?.email}</h2>
       <Button
         title="Logout"
-        variant="primary"
+        variant="outlined"
         onClick={() => dispatch(logout())}
       />
     </div>
