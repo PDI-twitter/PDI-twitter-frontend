@@ -7,6 +7,7 @@ interface IProps {
   value: string;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
   type?: string;
+  variant?: "outline" | "standart";
 }
 
 export const TextInput: React.FC<IProps> = ({
@@ -15,12 +16,19 @@ export const TextInput: React.FC<IProps> = ({
   value,
   onChange,
   type,
+  variant = "outline",
 }) => {
   return (
     <div className="w-full">
-      <div className="relative h-10 w-full min-w-[200px]">
-        <Input name={name} type={type} onChange={onChange} value={value} />
-        <InputLabel label={label} />
+      <div className="relative h-10 w-full ">
+        <Input
+          name={name}
+          type={type}
+          onChange={onChange}
+          value={value}
+          variant={variant}
+        />
+        <InputLabel label={label} variant={variant} />
       </div>
     </div>
   );

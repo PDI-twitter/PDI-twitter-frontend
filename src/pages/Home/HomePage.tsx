@@ -1,19 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import Button from "../../components/Button/Button";
-import { AuthState, logout } from "../../redux/authSlice";
-import { useSelector } from "react-redux";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
+import { Header } from "../../components/Header/Header";
+import { TweetInput } from "../../components/TweetInput/TweetInput";
 
 const HomePage: React.FC = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state: { auth: AuthState }) => state.auth.user);
-
   return (
-    <>
+    <div className="">
       <Sidebar />
-      <div className="p-4 sm:ml-64">HOME PAGE</div>
-    </>
+      <div className="flex flex-col sm:ml-64">
+        <Header name="Home" />
+        <TweetInput />
+      </div>
+    </div>
   );
 };
 
