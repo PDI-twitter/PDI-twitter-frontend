@@ -12,17 +12,18 @@ import { auth } from "../../services/firebaseConfig";
 import { Link } from "../Link/Link";
 import { Title } from "../Title/Title";
 import { Subtitle } from "../Subtitle/Subtitle";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 type RegisterFormProps = {};
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const register = async () => {
     dispatch(startLoading());
@@ -43,6 +44,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
         const errorMessage = error.message;
         console.log(`errorCode: ${errorCode}`);
         console.log(`errorMessage: ${errorMessage}`);
+        alert("ERROR");
       })
       .finally(() => {
         dispatch(finishLoading());

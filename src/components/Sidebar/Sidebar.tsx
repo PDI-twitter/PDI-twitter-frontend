@@ -15,7 +15,6 @@ export const Sidebar: React.FC<SideBarProps> = ({}) => {
   return (
     <>
       <SidebarButton toogleSidebarVisibility={toogleSidebarVisibility} />
-
       <aside
         id="default-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen bg-white transition-transform -translate-x-full  border-r-2 border-gray-200 sm:translate-x-0 ${
