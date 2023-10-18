@@ -1,4 +1,4 @@
-import { SidebarLink } from "./SidebarLink";
+import { SidebarLink } from "../atoms/SidebarLink";
 
 type SidebarListProps = {
   list: {

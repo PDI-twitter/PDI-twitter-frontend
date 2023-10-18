@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { sidebarRoutesList } from "../../static/sidebar";
-import { SidebarButton } from "./SidebarButton";
+import { sidebarRoutesList } from "../static/sidebar";
+import { SidebarButton } from "../atoms/SidebarButton";
 import { SidebarList } from "./SidebarList";
-import { Logo } from "../Logo/Logo";
+import { logoSVG } from "../static/logoSVG";
 
 type SideBarProps = {};
 
@@ -25,9 +25,7 @@ export const Sidebar: React.FC<SideBarProps> = ({}) => {
         {isOpen && (
           <SidebarButton toogleSidebarVisibility={toogleSidebarVisibility} />
         )}
-        <div className="m-4">
-          <Logo />
-        </div>
+        <div className="m-4">{logoSVG}</div>
         <SidebarList list={sidebarRoutesList} />
       </aside>
     </>

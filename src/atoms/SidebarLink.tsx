@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { AuthState, logout } from "../../redux/authSlice";
+import { AuthState, logout } from "../redux/authSlice";
 import { useSelector } from "react-redux";
 
 type SidebarLinkProps = {

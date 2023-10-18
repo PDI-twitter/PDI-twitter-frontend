@@ -1,5 +1,5 @@
-import { Input } from "./Input";
-import { InputLabel } from "./InputLabel";
+import { Input } from "../atoms/Input";
+import { InputLabel } from "../atoms/InputLabel";
 
 interface IProps {
   name: string;

@@ -1,33 +1,25 @@
 import { useDispatch } from "react-redux";
-import { TextInput } from "../TextInput";
+import { TextInput } from "./TextInput";
 import { useState } from "react";
-import {
-  finishLoading,
-  loginSuccess,
-  startLoading,
-} from "../../redux/authSlice";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import Button from "../Button/Button";
-import { auth } from "../../services/firebaseConfig";
-import { Link } from "../Link/Link";
-import { Title } from "../Title/Title";
-import { Subtitle } from "../Subtitle/Subtitle";
-import { redirect, useNavigate } from "react-router-dom";
+import { finishLoading, loginSuccess, startLoading } from "../redux/authSlice";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import Button from "../atoms/Button";
+import { auth } from "../services/firebaseConfig";
+import { Link } from "./Link";
+import { Title } from "../atoms/Title";
+import { Subtitle } from "../atoms/Subtitle";
 
-type RegisterFormProps = {};
+type LoginFormProps = {};
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
+export const LoginForm: React.FC<LoginFormProps> = ({}) => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
-
-  const register = async () => {
+  const login = async () => {
     dispatch(startLoading());
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const user = {
           id: userCredential.user.uid,
@@ -37,14 +29,15 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
           refreshToken: userCredential.user.refreshToken,
         };
         dispatch(loginSuccess(user));
-        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(`errorCode: ${errorCode}`);
         console.log(`errorMessage: ${errorMessage}`);
-        alert("ERROR");
+        if (errorCode === "auth/invalid-login-credentials") {
+          alert("Invalid credentials");
+        }
       })
       .finally(() => {
         dispatch(finishLoading());
@@ -53,7 +46,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    register();
+    login();
   };
 
   return (
@@ -62,15 +55,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
       className="flex flex-col bg-white shadow-[10px_10px_40px_rgba(0,0,0,0.4)] gap-[5px] p-10 rounded-[7px] w-full sm:w-[380px]"
       onSubmit={handleSubmit}
     >
-      <Title title={"Cadastro"} />
-      <Subtitle subtitle="Insira seus dados para se cadastrar." />
+      <Title title={"Olá"} />
+      <Subtitle subtitle="Digite os seus dados de acesso no campo abaixo." />
       <div className="space-y-4 mt-4">
-        <TextInput
-          label="Nome"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.currentTarget.value)}
-        />
         <TextInput
           label="E-mail"
           name="email"
@@ -87,9 +74,8 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({}) => {
         />
       </div>
       <div className="mb-4">
-        <Link label="Já tem uma conta? Entrar" href="/" />
+        <Link label="Ainda não tem uma conta?" href="/register" />
       </div>
-
       <Button title="Acessar" variant="standart" fullWidth type="submit" />
     </form>
   );

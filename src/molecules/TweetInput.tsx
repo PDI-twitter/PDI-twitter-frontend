@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { UserImage } from "./UserImage";
-import { TextInput } from "../TextInput";
+import { UserImage } from "../atoms/UserImage";
 import { useState } from "react";
-import Button from "../Button/Button";
+import Button from "../atoms/Button";
+import { TextInput } from "./TextInput";
 type TweetInputProps = {};
 
 export const TweetInput: React.FC<TweetInputProps> = ({}) => {

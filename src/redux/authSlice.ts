@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../models/user";
-import { localStorageControl } from "../storage/localStorage";
-import Cookies from "js-cookie";
 import { CookiesControl } from "../storage/Cookies";
 
 export interface AuthState {
